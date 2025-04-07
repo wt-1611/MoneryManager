@@ -1,0 +1,141 @@
+{% extends "index2.html" %}
+{% block content %}
+<main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+              <div class="col-sm-6"><h3 class="mb-0">记一笔</h3></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">记一笔</li>
+                    <li class="breadcrumb-item active" aria-current="page">记一笔消费</li>
+                </ol>
+              </div>
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content Header-->
+        <!--begin::App Content-->
+        <div class="app-content">
+          <!--begin::Container-->
+          <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row g-4">
+
+              <!--begin::Col-->
+              <div class="col-md-6">
+              <!--begin::Form Validation-->
+                <div class="card card-info card-outline mb-4">
+                  <!--begin::Header-->
+                  <div class="card-header"><div class="card-title">消费</div></div>
+                  <!--end::Header-->
+                  <!--begin::Form-->
+                  <form id='form1' class="needs-validation" novalidate method="post" action="{% url 'submit_form' %}">
+<!--                  <form id='form1' class="needs-validation" novalidate>-->
+                   {% csrf_token %}
+                    <!--begin::Body-->
+                    <div class="card-body">
+                      <!--begin::Row-->
+                      <div class="input-group mb-3">
+                          <span class="input-group-text">￥</span>
+                          <input
+                            type="text"
+                            class="form-control"
+                            aria-label="Amount (to the nearest dollar)"
+                            required
+                            name="monery"
+                          />
+                      </div>
+
+                      <div class="row g-3">
+                        <!--begin::Col-->
+<!--                        <div class="col-md-6">-->
+                          <label for="validationCustom04" class="form-label">类型</label>
+                          <select name='type' class="form-select" id="validationCustom04" required>
+                            <option selected disabled value="0">选择</option>
+                            <option value="0">其他</option>
+                            <option value="1">购物</option>
+                            <option value="2">餐饮</option>
+                          </select>
+                          <div class="invalid-feedback">请选择消费类型</div>
+<!--                        </div>-->
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <label for="validationCustom04" class="form-label">说些什么</label>
+                         <div class="input-group">
+
+                          <span class="input-group-text">附加信息</span>
+                          <textarea name='text' class="form-control" aria-label="With textarea"></textarea>
+                        </div>
+                        <!--end::Col-->
+                      </div>
+                      <!--end::Row-->
+
+                    </div>
+                    <!--end::Body-->
+                    <!--begin::Footer-->
+
+                    <div class="card-footer">
+                      <button class="btn btn-info" type="submit">提交</button>
+                    </div>
+                    {% if mg == 0  %}
+                    <div class="alert alert-danger" role="alert">
+                        {{mess}}
+                    </div>
+                    {% elif mg == 1 %}
+                    <div class="alert alert-success" role="alert">
+                      {{mess}}
+                    </div>
+                    {%endif%}
+                    <!--end::Footer-->
+                  </form>
+                  <!--end::Form-->
+                  <!--begin::JavaScript-->
+
+                  <script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (() => {
+                      'use strict';
+
+                      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                      const forms = document.querySelectorAll('.needs-validation');
+
+                      // Loop over them and prevent submission
+                      Array.from(forms).forEach((form) => {
+                        form.addEventListener(
+                          'submit',
+                          (event) => {
+                            if (!form.checkValidity()) {
+                              event.preventDefault();
+                              event.stopPropagation();
+                            }
+
+                            form.classList.add('was-validated');
+                          },
+                          false,
+                        );
+                      });
+                    })();
+                  </script>
+                  <!--end::JavaScript-->
+                </div>
+                <!--end::Form Validation-->
+              </div>
+
+
+              <!--end::Col-->
+
+            </div>
+            <!--end::Row-->
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+{% endblock %}
