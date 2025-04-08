@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/wtpublic/python:3.13
+FROM docker.io/library/python:3.13
 LABEL author="tian"
 LABEL version="1.0.0"
 COPY . /PythonProject
