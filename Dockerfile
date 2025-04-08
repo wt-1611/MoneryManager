@@ -1,7 +1,7 @@
 FROM registry.cn-hangzhou.aliyuncs.com/wtpublic/python:3.13
 LABEL author="tian"
 LABEL version="1.0.0"
-ADD PythonProject.tar /
+COPY . /PythonProject
 RUN cd /PythonProject && \
     pip3 install -r requirements.txt  -i https://pypi.mirrors.ustc.edu.cn/simple/
 WORKDIR /PythonProject/rec
