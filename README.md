@@ -3,7 +3,8 @@
 Personal finance。
 # 运行
 ```bash
-docker run -v ./mmanager:/PythonProject/rec/data -p 15006:8000 registry.cn-hangzhou.aliyuncs.com/wtpublic/mmanager:1.0.0
+docker run -d  -v ./mmanager:/PythonProject/rec/data -p 15006:8000 --name monerymanager uhub.service.ucloud.cn/wtpublic/monerymanager:1.0.1
+
 ```
 # 展示
 ![img.png](img/img.png)
