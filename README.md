@@ -4,7 +4,6 @@ Personal finance。
 # 运行
 ```bash
 docker run -d  -v ./mmanager:/PythonProject/rec/data -p 15006:8000 --name monerymanager uhub.service.ucloud.cn/wtpublic/monerymanager:1.0.1
-
 ```
 # 展示
 ![img.png](img/img.png)
@@ -12,3 +11,4 @@ docker run -d  -v ./mmanager:/PythonProject/rec/data -p 15006:8000 --name monery
 ![img.png](img/img1.png)
 
 ![img.png](img/img2.png)
+
