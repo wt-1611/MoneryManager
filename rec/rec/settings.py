@@ -67,6 +67,10 @@ TEMPLATES = [
         },
     },
 ]
+LOGIN_URL = '/login/'
+#LOGIN_REDIRECT_URL = '/index2/'
+SESSION_COOKIE_AGE = 3600
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 WSGI_APPLICATION = 'rec.wsgi.application'
 

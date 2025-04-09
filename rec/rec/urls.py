@@ -10,4 +10,5 @@ urlpatterns = [
     path('debts/',views.debts,name='debts'),
     path('proc/',views.proc,name='proc'),
     path('adddebt/',views.adddebt,name='adddebt'),
+    path('login/', views.login, name='login'),
 ]

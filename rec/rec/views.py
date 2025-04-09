@@ -1,7 +1,7 @@
 from sys import intern
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.db.models import Q
 from pyexpat.errors import messages
 
@@ -11,8 +11,14 @@ from django.utils import timezone
 import pytz
 import numpy as np
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth import authenticate, login as auth_login
+from django.contrib import messages
 
 
+
+@login_required
 def index(request):
     return render(request, 'index.html')
 
@@ -63,7 +69,7 @@ def year_or_month_or_day():
 
     return addition(year_monery,mounth_monery,day_monery)
 
-
+@login_required
 def index2(request):
 
     #print(beijing_time.year)
@@ -101,10 +107,10 @@ def index2(request):
 
     #print(all)
     return render(request, 'main.html',all)
-
+@login_required
 def addexpense(request):
     return render(request, 'addexpense.html')
-
+@login_required
 def submit_form(request):
     if request.method == 'POST':
         expense = request.POST.get('monery')
@@ -144,6 +150,7 @@ def submit_form(request):
     return render(request, 'addexpense.html')
 
 #债务明细
+@login_required
 def debts(request):
     liss = []
     lis = []
@@ -174,10 +181,12 @@ def debts(request):
     return render(request, 'detailOfdebts.html',dic1)
 
 #负债
+@login_required
 def adddebt(request):
     return render(request,'adddebt.html')
 
 #负债
+@login_required
 def proc(request):
     if request.method == 'POST':
         #利息
@@ -226,5 +235,14 @@ def proc(request):
     return render(request, 'adddebt.html')
 
 
-
-
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect('index2')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'login.html')
