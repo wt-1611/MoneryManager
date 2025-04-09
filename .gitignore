@@ -1,2 +1,3 @@
 .venv/
 rec/data/db.sqlite3
+rec/rec/migrations/
