@@ -110,6 +110,11 @@ def submit_form(request):
         expense = request.POST.get('monery')
         text = request.POST.get('text')
         ty= request.POST.get('type')
+        dueDate = request.POST.get('dueDate')
+
+        #print(dueDate)
+
+
         if not ty:
             ty='0'
         mg=1
@@ -121,7 +126,7 @@ def submit_form(request):
 
         #Money.objects.create(Consumption=expense, OtherInfo=text, Consumption_type=ty)
         try:
-            Money.objects.create(Consumption=expense,OtherInfo=text,Consumption_type=ty)
+            Money.objects.create(Consumption=expense,OtherInfo=text,Consumption_type=ty,Consumption_time=dueDate)
         except:
             message="录入失败!!!"
             mg=0

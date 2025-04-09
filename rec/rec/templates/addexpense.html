@@ -66,6 +66,20 @@
                           <div class="invalid-feedback">请选择消费类型</div>
 <!--                        </div>-->
                         <!--end::Col-->
+
+                        <!--begin::Col-->
+                      <div class="form-group">
+                         <label for="dueDate">到期日期</label>
+                         <div class="input-group">
+                           <div class="input-group-prepend">
+                             <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                           </div>
+                           <input  type="date" class="form-control" id="dueDate" name="dueDate">
+                         </div>
+                      </div>
+                          <!--end::Col-->
+
+
                         <!--begin::Col-->
                         <label for="validationCustom04" class="form-label">说些什么</label>
                          <div class="input-group">
@@ -97,6 +111,10 @@
                   </form>
                   <!--end::Form-->
                   <!--begin::JavaScript-->
+                <script>
+                  // 设置日期输入框的默认值为今天
+                  document.getElementById('dueDate').value = new Date().toISOString().substring(0, 10);
+                </script>
 
                   <script>
                     // Example starter JavaScript for disabling form submissions if there are invalid fields
