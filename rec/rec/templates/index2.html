@@ -186,7 +186,7 @@
               <li class="nav-item">
                 <a href="{% url 'index2' %}" class="nav-link">
                   <i class="nav-icon bi bi-currency-dollar"></i>
-                  <p>财务总览</p>
+                  <p>消费概览</p>
                 </a>
               </li>
 
@@ -219,6 +219,14 @@
                       <p>记一笔债务</p>
                     </a>
                   </li>
+
+                  <li class="nav-item">
+                    <a href="{% url 'addreap' %}" class="nav-link" data-bs-auto-close="outside">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>记一笔收入</p>
+                    </a>
+                  </li>
+
                 </ul>
               </li>
 
@@ -547,58 +555,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- ChartJS -->
-    <script>
-      const sales_chart_options = {
-        series: [
-          {
-            name: '消费(元)',
-             data: [
-             {% for i in monery.values  %}
-                {{i}},
-             {% endfor  %}
-             ] ,
-            //data:  [28, 48, 40, 19, 86, 27, 677,211],
-          },
 
-        ],
-        chart: {
-          height: 300,
-          type: 'area',
-          toolbar: {
-            show: false,
-          },
-        },
-        legend: {
-          show: false,
-        },
-        colors: ['#0d6efd', '#20c997'],
-        dataLabels: {
-          enabled: false,
-        },
-        stroke: {
-          curve: 'smooth',
-        },
-        xaxis: {
-          type: 'datetime',
-          categories: [
-            {% for i in monery.keys %}
-                '{{i}}',
-             {% endfor  %}
-          ],
-        },
-        tooltip: {
-          x: {
-            format: 'dd MMM yyyy',
-          },
-        },
-      };
-
-      const sales_chart = new ApexCharts(
-        document.querySelector('#revenue-chart'),
-        sales_chart_options,
-      );
-      sales_chart.render();
-    </script>
 
     <!-- jsvectormap -->
     <script

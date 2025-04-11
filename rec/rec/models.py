@@ -6,7 +6,8 @@ class Money(models.Model):
     method_choices = (
         (0,'其他'),
         (1,'购物'),
-        (2,'餐饮')
+        (2,'餐饮'),
+        (3,'还款')
     )
 
 
@@ -31,3 +32,10 @@ class Loan(models.Model):
 
     def __str__(self):
         return f'loan-{time.time()}'
+
+class Reap(models.Model):
+
+    monery = models.DecimalField('收入金额',max_digits=7,decimal_places=2)
+    Consumption_time = models.DateField('收入时间', default=timezone.now)
+    def __str__(self):
+        return f'reap-{time.time()}'

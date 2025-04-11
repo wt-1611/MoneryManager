@@ -7,11 +7,11 @@
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">财务总览</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">消费概览</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">财务总览</li>
+                  <li class="breadcrumb-item active" aria-current="page">消费概览</li>
                 </ol>
               </div>
             </div>
@@ -139,17 +139,29 @@
             <!--end::Row-->
             <!--begin::Row-->
             <div class="row">
+
+
+
+
+
               <!-- Start col -->
               <div class="col-lg-7 connectedSortable">
+<!--                <div class="card mb-4">-->
+<!--                  <div class="card-header"><h3 class="card-title">-->
+<!--                    消费历史-->
+
+<!--                  </h3></div>-->
+
+<!--                  <div class="card-body"><div id="revenue-chart"></div></div>-->
+
+<!--                </div>-->
+
+
                 <div class="card mb-4">
-                  <div class="card-header"><h3 class="card-title">
-                    消费历史
-
-                  </h3></div>
-
+                  <div class="card-header"><h3 class="card-title">Sales Value</h3></div>
                   <div class="card-body"><div id="revenue-chart"></div></div>
-
                 </div>
+
                 <!-- /.card -->
                 <!-- DIRECT CHAT -->
                 <!--skip-->
@@ -158,59 +170,139 @@
 
               <div class="col-lg-5 connectedSortable">
                  <div class="card mb-4">
+<!--                  <div class="card-header">-->
+<!--                    <h3 class="card-title">消费占比</h3>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash; /.card-header &ndash;&gt;-->
+<!--                  <div class="card-body p-0">-->
+<!--                    <table class="table table-striped">-->
+<!--                      <thead>-->
+<!--                        <tr>-->
+<!--                          <th style="width: 10px">#</th>-->
+<!--                          <th>消费类型</th>-->
+<!--                          <th>占比</th>-->
+<!--                          <th style="width: 40px"></th>-->
+<!--                        </tr>-->
+<!--                      </thead>-->
+<!--                      <tbody>-->
+<!--                        <tr class="align-middle">-->
+<!--                          <td>1.</td>-->
+<!--                          <td>其他</td>-->
+<!--                          <td>-->
+<!--                            <div class="progress progress-xs">-->
+<!--                              <div-->
+<!--                                class="progress-bar progress-bar-danger"-->
+<!--                                style="width: {{percentages.0}}%"-->
+<!--                              ></div>-->
+<!--                            </div>-->
+<!--                          </td>-->
+<!--                          <td><span class="badge text-bg-danger">{{percentages.0}} %</span></td>-->
+<!--                        </tr>-->
+
+<!--                        <tr class="align-middle">-->
+<!--                          <td>2.</td>-->
+<!--                          <td>购物</td>-->
+<!--                          <td>-->
+<!--                            <div class="progress progress-xs progress-striped active">-->
+<!--                              <div class="progress-bar text-bg-success" style="width: {{percentages.1}}%"></div>-->
+<!--                            </div>-->
+<!--                          </td>-->
+<!--                          <td><span class="badge text-bg-success">{{percentages.1}} %</span></td>-->
+<!--                        </tr>-->
+<!--                        <tr class="align-middle">-->
+<!--                          <td>3.</td>-->
+<!--                          <td>餐饮</td>-->
+<!--                          <td>-->
+<!--                            <div class="progress progress-xs">-->
+<!--                              <div class="progress-bar text-bg-warning" style="width: {{percentages.2}}%"></div>-->
+<!--                            </div>-->
+<!--                          </td>-->
+<!--                          <td><span class="badge text-bg-warning">{{percentages.2}} %</span></td>-->
+<!--                        </tr>-->
+<!--                        <tr class="align-middle">-->
+<!--                          <td>4.</td>-->
+<!--                          <td>还款</td>-->
+<!--                          <td>-->
+<!--                            <div class="progress progress-xs">-->
+<!--                              <div class="progress-bar text-bg-warning" style="width: {{percentages.3}}%"></div>-->
+<!--                            </div>-->
+<!--                          </td>-->
+<!--                          <td><span class="badge text-bg-warning">{{percentages.3}} %</span></td>-->
+<!--                        </tr>-->
+<!--                      </tbody>-->
+<!--                    </table>-->
+<!--                  </div>-->
+                  <!-- /.card-body -->
+                   <!-- /.info-box -->
+              <div class="card mb-4">
                   <div class="card-header">
-                    <h3 class="card-title">消费占比</h3>
+                    <h3 class="card-title">收支占比</h3>
+                    <div class="card-tools">
+                      <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
+                        <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                        <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                      </button>
+                      <button type="button" class="btn btn-tool" data-lte-toggle="card-remove">
+                        <i class="bi bi-x-lg"></i>
+                      </button>
+                    </div>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body p-0">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th style="width: 10px">#</th>
-                          <th>消费类型</th>
-                          <th>占比</th>
-                          <th style="width: 40px"></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="align-middle">
-                          <td>1.</td>
-                          <td>其他</td>
-                          <td>
-                            <div class="progress progress-xs">
-                              <div
-                                class="progress-bar progress-bar-danger"
-                                style="width: {{percentages.0}}%"
-                              ></div>
-                            </div>
-                          </td>
-                          <td><span class="badge text-bg-danger">{{percentages.0}} %</span></td>
-                        </tr>
-
-                        <tr class="align-middle">
-                          <td>2.</td>
-                          <td>购物</td>
-                          <td>
-                            <div class="progress progress-xs progress-striped active">
-                              <div class="progress-bar text-bg-success" style="width: {{percentages.1}}%"></div>
-                            </div>
-                          </td>
-                          <td><span class="badge text-bg-success">{{percentages.1}} %</span></td>
-                        </tr>
-                        <tr class="align-middle">
-                          <td>3.</td>
-                          <td>餐饮</td>
-                          <td>
-                            <div class="progress progress-xs">
-                              <div class="progress-bar text-bg-warning" style="width: {{percentages.2}}%"></div>
-                            </div>
-                          </td>
-                          <td><span class="badge text-bg-warning">{{percentages.2}} %</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="card-body">
+                    <!--begin::Row-->
+                    <div class="row">
+                      <div class="col-12"><div id="pie-chart"></div></div>
+                      <!-- /.col -->
+                    </div>
+                    <!--end::Row-->
                   </div>
                   <!-- /.card-body -->
+                  <div class="card-footer p-0">
+                    <ul class="nav nav-pills flex-column">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          本月收入
+                          <span class="float-end text-danger">
+
+                           {{inmonery}}
+                          </span>
+                        </a>
+                      </li>
+
+                    </ul>
+                  </div>
+                  <!-- /.footer -->
+                </div>
+                       <script
+      src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
+      integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8="
+      crossorigin="anonymous"
+    ></script>
+                <script>
+                        //-------------
+      // - PIE CHART -
+      //-------------
+
+      const pie_chart_options = {
+        series: {{ pie_data.series|safe }}, //[700, 500, 400, 600, 300, 100],
+        chart: {
+          type: 'donut',
+        },
+        labels: {{ pie_data.labels|safe }}, //['Chrome', 'Edge', 'FireFox', 'Safari', 'Opera', 'IE'],
+        dataLabels: {
+          enabled: false,
+        },
+        colors: {{ pie_data.colors|safe }} ,//['#0d6efd', '#20c997', '#ffc107', '#d63384', '#6f42c1', '#adb5bd'],
+      };
+
+      const pie_chart = new ApexCharts(document.querySelector('#pie-chart'), pie_chart_options);
+      pie_chart.render();
+
+      //-----------------
+      // - END PIE CHART -
+      //-----------------
+                </script>
+                <!-- /.card -->
                 </div>
                 <!-- /.card -->
               </div>
@@ -225,4 +317,109 @@
         </div>
         <!--end::App Content-->
       </main>
+<!--<script>-->
+<!--                  const sales_chart_options = {-->
+<!--                    series: [-->
+<!--                      {-->
+<!--                        name: '消费(元)',-->
+<!--                         //data: [-->
+<!--                         //{% for i in monery.values  %}-->
+<!--                         //   {{i}},-->
+<!--                         //{% endfor  %}-->
+<!--                         //] ,-->
+<!--                        data:  [48.0, 40.0,20], //, 19, 86, 27, 677,211],-->
+<!--                      },-->
+
+<!--                    ],-->
+<!--                    chart: {-->
+<!--                      height: 300,-->
+<!--                      type: 'area',-->
+<!--                      toolbar: {-->
+<!--                        show: false,-->
+<!--                      },-->
+<!--                    },-->
+<!--                    legend: {-->
+<!--                      show: false,-->
+<!--                    },-->
+<!--                    colors: ['#0d6efd', '#20c997'],-->
+<!--                    dataLabels: {-->
+<!--                      enabled: false,-->
+<!--                    },-->
+<!--                    stroke: {-->
+<!--                      curve: 'smooth',-->
+<!--                    },-->
+<!--                    xaxis: {-->
+<!--                      type: 'datetime',-->
+<!--                      categories: [-->
+<!--                        {% for i in monery.keys %}-->
+<!--                            '{{i}}',-->
+<!--                         {% endfor  %}-->
+<!--                      ],-->
+<!--                    },-->
+<!--                    tooltip: {-->
+<!--                      x: {-->
+<!--                        format: 'dd MMM yyyy',-->
+<!--                      },-->
+<!--                    },-->
+<!--                  };-->
+
+<!--                  const sales_chart = new ApexCharts(-->
+<!--                    document.querySelector('#revenue-chart'),-->
+<!--                    sales_chart_options,-->
+<!--                  );-->
+<!--                  sales_chart.render();-->
+<!--                </script>-->
+
+    <script>
+      // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
+      // IT'S ALL JUST JUNK FOR DEMO
+      // ++++++++++++++++++++++++++++++++++++++++++
+
+      const sales_chart_options = {
+        series: [
+          {
+            name: 'Digital Goods',
+            data: {{ line_chart_data.series|safe }}, //[28, 48, 40, 19, 86, 27, 90],
+          },
+          //{
+          //  name: 'Electronics',
+          //  data: {{ line_chart_data.shenyu|safe }},
+          //},
+        ],
+        chart: {
+          height: 300,
+          type: 'area',
+          toolbar: {
+            show: false,
+          },
+        },
+        legend: {
+          show: false,
+        },
+        colors: ['#0d6efd', '#20c997'],
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          curve: 'smooth',
+        },
+        xaxis: {
+          type: 'datetime',
+
+
+          categories: {{ line_chart_data.categories|safe }},
+        },
+        tooltip: {
+          x: {
+            format: 'dd MMM yyyy',
+          },
+        },
+      };
+
+      const sales_chart = new ApexCharts(
+        document.querySelector('#revenue-chart'),
+        sales_chart_options,
+      );
+      sales_chart.render();
+    </script>
 {% endblock %}

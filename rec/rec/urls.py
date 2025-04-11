@@ -11,4 +11,6 @@ urlpatterns = [
     path('proc/',views.proc,name='proc'),
     path('adddebt/',views.adddebt,name='adddebt'),
     path('login/', views.login, name='login'),
+    path('addreap/',views.addreap,name='addreap'),
+    path('reap/',views.reap,name='reap')
 ]

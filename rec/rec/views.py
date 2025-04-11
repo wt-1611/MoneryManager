@@ -3,9 +3,10 @@ from sys import intern
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.db.models import Q
+from numpy.ma.core import append
 from pyexpat.errors import messages
-
-from .models import Money,Loan
+from django.db.models import Sum
+from .models import Money,Loan,Reap
 from  datetime import  datetime
 from django.utils import timezone
 import pytz
@@ -29,7 +30,7 @@ beijing_time = utc_now.astimezone(beijing_tz)
 
 
 #求今年、当月，当天的消费
-def addition(year,mounth,day):
+def addition(year,mounth,day,total):
 
     year_total=0
     for i in year:
@@ -43,7 +44,13 @@ def addition(year,mounth,day):
     for i in day:
          day_total=i.Consumption+day_total
          #print(i)
-    return year_total,mounth_total,day_total
+
+    t=0
+    for r in total:
+        t = t + r.monery
+    #print(total)
+
+    return year_total,mounth_total,day_total,t
 
 
 
@@ -63,39 +70,94 @@ def year_or_month_or_day():
     same_day=datetime(beijing_time.year, beijing_time.month, beijing_time.day)
     #print(beijing_time.year, beijing_time.month, beijing_time)
 
+    # total=0
+    # for r in Reap.objects.filter(Consumption_time__range=(start_of_mounth,end_of_month)):
+    #     total = total + r.monery
+    # print(total)
+
+    total=Reap.objects.filter(Consumption_time__range=(start_of_mounth, end_of_month))
     year_monery=Money.objects.filter(Consumption_time__range=(start_of_year, end_of_year))
     mounth_monery=Money.objects.filter(Consumption_time__range=(start_of_mounth,end_of_month))
     day_monery = Money.objects.filter(Consumption_time__range=(same_day,same_day))
 
-    return addition(year_monery,mounth_monery,day_monery)
+    return addition(year_monery,mounth_monery,day_monery,total)
 
 @login_required
 def index2(request):
-
-    #print(beijing_time.year)
-    dic = {}
-    for i in Money.objects.all():
-
-        if str(i.Consumption_time) not in dic:
-            dic[str(i.Consumption_time)] = i.Consumption
-        elif str(i.Consumption_time)  in dic:
-            dic[str(i.Consumption_time)] =  dic[str(i.Consumption_time)] + i.Consumption
-
     all = {}
-    #消费
-    all['monery'] = dic
+    # 年月日消费统计
+    all['year'], all['mounth'], all['day'], all['inmonery'] = year_or_month_or_day()
 
-    #年月日消费统计
-    all['year'],all['mounth'],all['day']=year_or_month_or_day()
+
+
+    timlis=[]
+    xiaofei=[]
+
+
+    result = Money.objects.values('Consumption_time').annotate(total_amount=Sum('Consumption')).order_by('Consumption_time')
+
+    for i in result:
+        print(i)
+        timlis.append(str(i['Consumption_time']))
+        xiaofei.append(float(i['total_amount']))
+
+        #shengyu.append(all['inmonery']-i['total_amount'])
+
+
+
+    print(timlis)
+    print(xiaofei)
+    #print(shengyu)
+
+    line_chart_data = {
+        'series': xiaofei, #[30, 40, 35, 50, 49, 60, 70],
+        'categories': timlis,#['1日', '2日', '3日', '4日', '5日', '6日', '7日']
+        #'shenyu': shengyu,
+    }
+    #消费
+    all['line_chart_data'] = line_chart_data
+
+    #print(dic)
+
+
 
     other=Money.objects.filter(Consumption_type=0)
     consumption=Money.objects.filter(Consumption_type=1)
     dine=Money.objects.filter(Consumption_type=2)
-
+    m=Money.objects.filter(Consumption_type=3)
+    all_monery=[other,consumption,dine,m]
     #print(other,consumption,dine)
+    #print([len(other),len(consumption),len(dine),len(m)])
+    # total=0
+    # for r in Reap.objects.all():
+    #     total = total + r.monery
 
-    d = np.array([len(other),len(consumption),len(dine)])
-    percentages  = np.around((d/np.sum(d))*100)
+    # all['inmonery']=total
+    mlis=[]
+    for cc in all_monery:
+        ten=0
+        for c in cc:
+            #print(c.Consumption)
+            ten=ten+c.Consumption
+        # total=total-ten
+        #其他，购物，餐饮，还款
+        mlis.append(float(ten))
+    #print(mlis)
+    mlis.append(float(all['inmonery'] - all['mounth']))
+
+    # mlis.append(float(total))
+
+    # 准备饼图数据
+    pie_data = {
+        'series': mlis,  #[700, 500, 400, 600, 300, 100],
+        'labels': ['其他','购物','餐饮','还款','剩余'], #['Chrome', 'Edge', 'FireFox', 'Safari', 'Opera', 'IE'],
+        'colors': ['#0d6efd', '#20c997', '#ffc107', '#d63384','#adb5bd'] #'#6f42c1', '#adb5bd']
+    }
+    all['pie_data']=pie_data
+    #print(mlis)
+
+    #d = np.array([len(other),len(consumption),len(dine),len(m)])
+    #percentages  = np.around((d/np.sum(d))*100)
     #print(percentages)
     total=0
     #总负债
@@ -103,10 +165,17 @@ def index2(request):
         total=total+i.principal+i.interest
     #print(total)
     all['loan']=total
-    all['percentages']=percentages
+
+
+
+    #all['percentages']=percentages
+    #print(percentages)
 
     #print(all)
     return render(request, 'main.html',all)
+
+
+
 @login_required
 def addexpense(request):
     return render(request, 'addexpense.html')
@@ -246,3 +315,31 @@ def login(request):
         else:
             messages.error(request, 'Invalid username or password.')
     return render(request, 'login.html')
+
+@login_required
+def addreap(requset):
+    return render(requset,'addreap.html')
+
+@login_required
+def reap(request):
+    if request.method == 'POST':
+        mg=1
+        message='录入成功！！'
+        monery = request.POST.get('monery')
+        monery = float(Decimal(monery).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
+
+
+        try:
+            Reap.objects.create(monery=monery)
+        except:
+            message = "录入失败!!!"
+            mg = 0
+
+        context={
+            "mess": message,
+            'mg':mg,
+        }
+        return render(request, 'addreap.html',context)
+
+    return render(request, 'addreap.html')
+
