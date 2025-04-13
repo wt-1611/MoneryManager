@@ -68,6 +68,7 @@ def year_or_month_or_day():
         end_of_month = datetime(beijing_time.year, beijing_time.month + 1, 1) - timezone.timedelta(days=1)
 
     same_day=datetime(beijing_time.year, beijing_time.month, beijing_time.day)
+    print(same_day)
     #print(beijing_time.year, beijing_time.month, beijing_time)
 
     # total=0
@@ -78,8 +79,8 @@ def year_or_month_or_day():
     total=Reap.objects.filter(Consumption_time__range=(start_of_mounth, end_of_month))
     year_monery=Money.objects.filter(Consumption_time__range=(start_of_year, end_of_year))
     mounth_monery=Money.objects.filter(Consumption_time__range=(start_of_mounth,end_of_month))
-    day_monery = Money.objects.filter(Consumption_time__range=(same_day,same_day))
-
+    #day_monery = Money.objects.filter(Consumption_time__range=(same_day,same_day))
+    day_monery = Money.objects.filter(Consumption_time=same_day)
     return addition(year_monery,mounth_monery,day_monery,total)
 
 @login_required
