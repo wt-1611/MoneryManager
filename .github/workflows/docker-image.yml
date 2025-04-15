@@ -8,6 +8,7 @@ on:
 
 env:
   version: 1.0.2
+  REGISTRY: docker.io/kingofme
 
 jobs:
 
@@ -18,17 +19,17 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.REGISTRY }}/monerymanager:${{ env.version }}
+      run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/monerymanager:${{ env.version }}
 
 
 
-    - name: Authenticate to registry ${{ secrets.REGISTRY }}
+    - name: Authenticate to registry ${{ env.REGISTRY }}
       uses: docker/login-action@v3
       with:
-        registry: ${{ secrets.REGISTRY }}
+        registry: ${{ env.REGISTRY }}
         username: ${{ secrets.REGISTRY_USER }}
         password: ${{ secrets.REGISTRY_TOKEN }}
 
     - name: push docker image
       run: |
-        docker push ${{ secrets.REGISTRY }}/monerymanager:${{ env.version }}
+        docker push ${{ env.REGISTRY }}/monerymanager:${{ env.version }}
