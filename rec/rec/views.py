@@ -27,7 +27,7 @@ beijing_tz = pytz.timezone('Asia/Shanghai')
 utc_now = timezone.now()
 beijing_time = utc_now.astimezone(beijing_tz)
 
-
+same_day=beijing_time.strftime("%Y-%m-%d")
 
 #求今年、当月，当天的消费
 def addition(year,mounth,day,total):
@@ -67,9 +67,10 @@ def year_or_month_or_day():
     else:
         end_of_month = datetime(beijing_time.year, beijing_time.month + 1, 1) - timezone.timedelta(days=1)
 
-    same_day=datetime(beijing_time.year, beijing_time.month, beijing_time.day)
+    #same_day=datetime(beijing_time.year, beijing_time.month, beijing_time.day)
+
+
     print(same_day)
-    #print(beijing_time.year, beijing_time.month, beijing_time)
 
     # total=0
     # for r in Reap.objects.filter(Consumption_time__range=(start_of_mounth,end_of_month)):
@@ -81,6 +82,7 @@ def year_or_month_or_day():
     mounth_monery=Money.objects.filter(Consumption_time__range=(start_of_mounth,end_of_month))
     #day_monery = Money.objects.filter(Consumption_time__range=(same_day,same_day))
     day_monery = Money.objects.filter(Consumption_time=same_day)
+
     return addition(year_monery,mounth_monery,day_monery,total)
 
 @login_required
@@ -98,7 +100,7 @@ def index2(request):
     result = Money.objects.values('Consumption_time').annotate(total_amount=Sum('Consumption')).order_by('Consumption_time')
 
     for i in result:
-        print(i)
+        #rint(i)
         timlis.append(str(i['Consumption_time']))
         xiaofei.append(float(i['total_amount']))
 
@@ -106,8 +108,8 @@ def index2(request):
 
 
 
-    print(timlis)
-    print(xiaofei)
+    #print(timlis)
+    #print(xiaofei)
     #print(shengyu)
 
     line_chart_data = {
@@ -167,7 +169,7 @@ def index2(request):
     #print(total)
     all['loan']=total
 
-
+    all['today']=same_day
 
     #all['percentages']=percentages
     #print(percentages)
