@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  version: 1.0.1
+  version: 1.0.2
 
 jobs:
 
