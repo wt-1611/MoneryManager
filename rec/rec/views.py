@@ -233,14 +233,18 @@ def debts(request):
     f=0
     for i in Loan.objects.all():
         f=f+1
+
         lis.append(f)
+        # 债务方
         lis.append(i.name)
+        # 总欠款
         lis.append(i.principal)
         #lis.append(i.interest)
         #print(type(i.interest))
         #总额度
         #lis.append(i.interest+i.principal)
-        lis.append(i.principal)
+        #lis.append(i.principal)
+
         #每月待还
         lis.append(i.Tobepaid)
 
