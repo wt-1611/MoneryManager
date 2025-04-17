@@ -24,9 +24,9 @@ class Loan(models.Model):
     #债务名称
     name = models.TextField('债务名称')
     #本金
-    principal = models.DecimalField('借款本金',max_digits=7, decimal_places=2)
+    principal = models.DecimalField('借款总金额',max_digits=7, decimal_places=2)
     #利息
-    interest = models.DecimalField('借款利息',max_digits=7, decimal_places=2)
+    #interest = models.DecimalField('借款利息',max_digits=7, decimal_places=2)
     #月还款
     Tobepaid = models.DecimalField('每月待还',max_digits=7, decimal_places=2)
 

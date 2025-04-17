@@ -167,7 +167,7 @@ def index2(request):
     total=0
     #总负债
     for i in Loan.objects.all():
-        total=total+i.principal+i.interest
+        total=total+i.principal #+i.interest
     #print(total)
     all['loan']=total
 
@@ -236,10 +236,11 @@ def debts(request):
         lis.append(f)
         lis.append(i.name)
         lis.append(i.principal)
-        lis.append(i.interest)
+        #lis.append(i.interest)
         #print(type(i.interest))
         #总额度
-        lis.append(i.interest+i.principal)
+        #lis.append(i.interest+i.principal)
+        lis.append(i.principal)
         #每月待还
         lis.append(i.Tobepaid)
 
@@ -264,7 +265,7 @@ def adddebt(request):
 def proc(request):
     if request.method == 'POST':
         #利息
-        interest = request.POST.get('interest')
+        #interest = request.POST.get('interest')
         #本金
         debtAmount = request.POST.get('debtAmount')
         debtorName = request.POST.get('debtorName')
@@ -272,17 +273,17 @@ def proc(request):
         mg=1
         #print(debtAmount)
 
-        if not interest or not debtorName or not debtAmount or not needpaid:
+        if   not debtorName or not debtAmount or not needpaid:
             message='不要留空!!!'
             mg = 0
 
         try:
             debtAmount= float(Decimal(debtAmount).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
-            interest= float(Decimal(interest).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
-            if debtAmount <= interest:
-                message='总利息大于等于本金！！'
-                mg=0
-            elif debtAmount == 0:
+            # interest= float(Decimal(interest).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP))
+            #if debtAmount <= interest:
+            #    message='总利息大于等于本金！！'
+            #    mg=0
+            if debtAmount == 0:
                 message = '本金等于0！！'
                 mg=0
         except:
@@ -291,7 +292,7 @@ def proc(request):
 
         if mg != 0:
             try:
-                Loan.objects.create(name=debtorName,principal=debtAmount,interest=interest,Tobepaid=needpaid)
+                Loan.objects.create(name=debtorName,principal=debtAmount,Tobepaid=needpaid)
             except:
                 message="录入失败!!!"
                 mg=0
