@@ -23,11 +23,7 @@ from django.contrib import messages
 def index(request):
     return render(request, 'index.html')
 
-beijing_tz = pytz.timezone('Asia/Shanghai')
-utc_now = timezone.now()
-beijing_time = utc_now.astimezone(beijing_tz)
 
-same_day=beijing_time.strftime("%Y-%m-%d")
 
 #求今年、当月，当天的消费
 def addition(year,mounth,day,total):
@@ -53,10 +49,14 @@ def addition(year,mounth,day,total):
     return year_total,mounth_total,day_total,t
 
 
-
+same_day=''
 #获取今年、当月、当天的消费对象
 def year_or_month_or_day():
-
+    beijing_tz = pytz.timezone('Asia/Shanghai')
+    utc_now = timezone.now()
+    beijing_time = utc_now.astimezone(beijing_tz)
+    global same_day
+    same_day = beijing_time.strftime("%Y-%m-%d")
     start_of_year = datetime(beijing_time.year, 1, 1)
     end_of_year = datetime(beijing_time.year, 12, 31)
 
@@ -87,6 +87,8 @@ def year_or_month_or_day():
 
 @login_required
 def index2(request):
+
+
     all = {}
     # 年月日消费统计
     all['year'], all['mounth'], all['day'], all['inmonery'] = year_or_month_or_day()
